@@ -1,0 +1,19 @@
+html {
+  height: 100%; }
+
+body {
+  height: 100%;
+  margin: 0;
+  background: red;
+  color: #ffcccc;
+  font-size: 4em;
+  text-shadow: 1px 1px 5px black; }
+
+div {
+  width: 50%;
+  line-height: 400px;
+  margin: auto;
+  background: green;
+  text-align: center; }
+
+/*# sourceMappingURL=4%20test.css.map */

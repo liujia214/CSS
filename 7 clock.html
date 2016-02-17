@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Clock</title>
+    <link rel="stylesheet" href="./css/clock.css">
+</head>
+<body>
+    <div class="clock">
+        <div class="center"></div>
+        <div class="second"></div>
+        <div class="minute"></div>
+        <div class="hour"></div>
+        <div class="item item-1"></div>
+        <div class="item item-2"></div>
+        <div class="item item-3"></div>
+        <div class="item item-4"></div>
+        <div class="item item-5"></div>
+        <div class="item item-6"></div>
+        <div class="item item-7"></div>
+        <div class="item item-8"></div>
+        <div class="item item-9"></div>
+        <div class="item item-10"></div>
+        <div class="item item-11"></div>
+        <div class="item item-12"></div>
+    </div>
+    <div class="icon"></div>
+    <script>
+        var clock = document.querySelector('.clock');
+        var second = document.getElementsByClassName('second')[0];
+        var minute = document.querySelector('.minute');
+        var hour = document.querySelector('.hour');
+        var stylesheet = document.styleSheets[0];
+        var clockicon = document.querySelector('.icon');
+
+        /*for(var i=0;i<61;i++){
+            (function (x){
+                var id = setTimeout(function(){
+                    pointer.style.transform = 'rotate(calc( 6deg *'+ x +')';
+                },1000*x);
+            })(i)
+
+        }
+        setInterval(function(){
+            for(var i=0;i<61;i++){
+                (function (x){
+                    var id = setTimeout(function(){
+                        pointer.style.transform = 'rotate(calc( 6deg *'+ x +')';
+                    },1000*x);
+                })(i)
+
+            }
+        },1000*60);*/
+
+        // ========= new code ===========//
+        setInterval(function(){
+            var seconds = new Date().getSeconds() * 6;
+            var minutes = new Date().getMinutes() * 6;
+            var hours = new Date().getHours() * 30 + new Date().getMinutes()/2;
+            if(seconds === 0){
+                console.log('0 second');
+                seconds=360;
+                second.style.transform = 'rotate(' + seconds + 'deg)';
+                console.log(second.style);
+                stylesheet.cssRules[6].style.transition = null;
+                second.style.transform = 'rotate(0deg)';
+            }else {
+                stylesheet.cssRules[6].style.transition = 'transform 1s ease';
+                second.style.transform = 'rotate(' + seconds + 'deg)';
+            }
+
+            minute.style.transform = 'rotate(' + minutes + 'deg)';
+            hour.style.transform = 'rotate(' + hours + 'deg)';
+        },1000);
+
+        clock.addEventListener('click',function(){
+            this.style.animation = 'clockmove 1000ms linear';
+            this.style.animationFillMode = 'forwards';
+            clockicon.style.animation = 'iconmove 1s linear 500ms';
+            clockicon.style.animationFillMode = 'forwards';
+        });
+
+    </script>
+</body>
+</html>

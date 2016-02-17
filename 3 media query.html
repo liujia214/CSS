@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Media Query</title>
+    <style>
+        body{
+            transition: all 1000ms ease;
+            font-size: 150%;
+        }
+        @media (min-width:500px) and (max-width: 800px) {
+
+        }
+        @media all and (orientation:portrait) {
+            body{
+                background: red;
+            }
+            body::before{
+                content: 'portrait';
+            }
+        }
+        @media all and (orientation: landscape){
+            body{
+                background: green;
+            }
+            body:before{
+                content: 'landscape';
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+</body>
+</html>

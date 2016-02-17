@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Observe</title>
+</head>
+<body>
+    Modified Name:<input id="new" type="text"/>
+    View Name:<input id="show" type="text">
+    <script>
+        var amy = {
+            type:'UI developer',
+            name:'amy Liu'
+        };
+        function addWatch(obj,prop,listener){
+            if(typeof obj.oldValue === 'undefined') {
+                obj.oldValue={};
+                obj.oldValue[prop] = obj[prop];
+            }
+            setInterval(function(){
+               if(obj.oldValue[prop] !== obj[prop]){
+                   listener(obj.oldValue[prop],obj[prop],obj,prop);
+                   obj.oldValue[prop] = obj[prop];
+               }
+            },0)
+        }
+
+        var newname = document.querySelector('#new');
+        var showname = document.querySelector('#show');
+        newname.addEventListener('change',function(){
+            amy.name = this.value;
+        });
+        addWatch(amy,'name',function(oldValue,newValue,obj,prop){
+            console.log('old value is ' + oldValue, 'new value is '+newValue);
+            showname.value = newValue;
+        });
+
+
+        var x = new Boolean(false);
+
+        console.log(1+x);
+
+
+
+
+    </script>
+</body>
+</html>

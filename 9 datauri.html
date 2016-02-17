@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>dataURI</title>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        ul{
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        li{
+            padding: 10px;
+        }
+        img{
+            width: 330px;
+            height: 330px;
+        }
+    </style>
+</head>
+<body>
+    <!--<img src="./image.txt" />-->
+
+    <button>select file</button>
+    <input type="file" multiple hidden>
+    <ul>
+        <!--<li>-->
+        <!--OpenSSL base64 - m/c-->
+        <!--</li>-->
+        <!--<li>-->
+        <!--atob() /  btoa()-->
+        <!--</li>-->
+    </ul>
+    <script>
+        var button = document.querySelector('button');
+        var input = document.querySelector('input[type="file"]');
+        var ul = document.querySelector('ul');
+        button.addEventListener('click',function(){
+            input.click();
+        });
+        input.addEventListener('change',function(){
+            Promise.all(Array.prototype.map.call(this.files,createPromise))
+                    .then(function(data){
+                data.forEach(function(ele){
+                    createImg(ele);
+                })
+            });
+
+        });
+
+        function createFileReader(file,callback){
+            var filereader = new FileReader();
+            filereader.addEventListener('loadend',function(){
+                callback(null,this.result);
+            });
+            filereader.addEventListener('error',function(){
+                callback(this,null);
+            });
+            filereader.readAsDataURL(file);
+        }
+
+        function createImg(src){
+            var li = document.createElement('li');
+            var img = document.createElement('img');
+            img.src = src;
+            ul.appendChild(li);
+            li.appendChild(img);
+        }
+
+        function createPromise(file){
+            return new Promise(function(resolve,reject){
+                createFileReader(file,function(err,result){
+                    if(err){
+                        reject(err);
+                    }else {
+                        resolve(result);
+                    }
+                });
+            })
+        }
+    </script>
+</body>
+</html>

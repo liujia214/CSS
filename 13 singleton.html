@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Singleton</title>
+</head>
+<body>
+    <script>
+        function SecurityKey(){
+            //window.encrypt
+            SecurityKey.instance = SecurityKey.instance || this;
+        }
+        SecurityKey.prototype.encrypt = function(){
+            return 'data';
+        };
+        SecurityKey.prototype.decrypt = function(){
+            return 'data';
+        };
+        (function (){
+            var security = new SecurityKey();   //same instance
+            var data = security.encrypt();
+        })()
+
+        (function (){
+            var security = new SecurityKey(); //same instance
+            var data = security.encrypt();
+        })()
+    </script>
+</body>
+</html>

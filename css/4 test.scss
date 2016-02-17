@@ -1,0 +1,25 @@
+
+$background: red;
+html{
+  height: 100%;
+}
+body{
+  height: 100%;
+  margin: 0;
+  background: $background;
+  color: lighten($background,40%);
+  //display: flex;
+  //align-items: center;
+  //justify-content: center;
+  font-size: 4em;
+  text-shadow: 1px 1px 5px darken($background,80%);
+}
+div{
+  width: 50%;
+  line-height: 400px;
+  margin: auto;
+  background: green;
+  text-align: center;
+  //display:table-cell;
+  //vertical-align: middle;
+}

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Selector</title>
     <style>
-        div{
+        div,p{
             height:100px;
             border: 1px solid darkred;
         }
@@ -13,6 +13,15 @@
         }
         :first-child :first-of-type :last-child :last-of-type{
 
+        }
+        body :not(div){
+            background: green;
+        }
+        div:empty::after{
+            content: 'hello';
+            display: block;
+            background: yellow;
+            line-height: 50px;
         }
     </style>
 </head>
@@ -28,5 +37,7 @@
     <p></p>
     <p></p>
     <p></p>
+
+    <div></div>
 </body>
 </html>

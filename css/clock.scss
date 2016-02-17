@@ -1,0 +1,131 @@
+$bodycolor: #d7d3b1;
+$clockcolor:#1d4c66;
+$pointercolor:#102525;
+$height: 100%;
+$position: absolute;
+
+html{
+  height: $height;
+}
+body{
+  height: $height;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $bodycolor;
+  font-family: Helvetica;
+}
+.clock{
+  width:400px;
+  height: 400px;
+  border: 3px solid $clockcolor;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  transition: transform 500ms ease;
+  background-image: url('../img/dog.jpeg');
+  background-size: cover;
+  background-position: 60% 50%;
+}
+.item{
+  position: $position;
+  width: 10px;
+  height: 20px;
+  background-color: $clockcolor;
+  top:0;
+  left: calc(50% - 5px);
+  transform-origin: 50% 200px;
+  color: $pointercolor;
+}
+.item::after{
+  position: $position;
+  top: 20px;
+}
+.center{
+  width: 10px;
+  height: 10px;
+  background-color: $pointercolor;
+  position: $position;
+  top: calc(50% - 5px);
+  left: calc(50% - 5px);
+  border-radius: 50%;
+}
+.pointer{
+  background-color: $pointercolor;
+  position: $position;
+  transform-origin: 50% 100%;
+  border-radius: 15px;
+  opacity: 0.7;
+  transition:transform 1000ms ease;
+}
+.second{
+  @extend .pointer;
+  width: 5px;
+  height: 160px;
+  top: 40px;
+  left: calc(50% - 2.5px);
+
+  //animation: move 60s linear 0s infinite;
+}
+.minute{
+  @extend .pointer;
+  width: 10px;
+  height: 140px;
+  top: 60px;
+  left: calc(50% - 5px);
+}
+.hour{
+  @extend .pointer;
+  width: 15px;
+  height: 120px;
+  top: 80px;
+  left: calc(50% - 7.5px);
+}
+.icon{
+  background-image: url('../img/clock.png');
+  background-size: cover;
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  opacity: 0;
+  top: 50px;
+  right: 400px;
+  transition: all 1s linear 100ms;
+}
+@keyframes move {
+  from{
+    transform:rotate(0deg)
+  }
+  to{
+    transform:rotate(360deg)
+  }
+}
+@keyframes clockmove {
+  from{
+    transform: scale(0.75,0.75) translate(100px,-100px);
+  }
+  to{
+    transform: scale(0.5,0.5) translate(300px,-300px);
+    opacity: 0;
+  }
+}
+@keyframes iconmove {
+  from{
+    opacity: 0;
+  }
+  to{
+    opacity: 1;
+    transform: scale(0.5,0.5);
+    top:0;
+    right: 300px;
+  }
+}
+@for $item from 1 through 12{
+  .item-#{$item}{
+    transform: rotate(30deg * $item);
+  }
+  .item-#{$item}::after{
+    content: $item+'';
+  }
+}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pub Sub</title>
+</head>
+<body>
+
+    <script>
+
+        function  Publisher(name){
+            this.name = name;
+            this.events = {};
+        }
+
+        Publisher.prototype.publish = function(event,issue){
+            this.events[event].forEach(function(fn){
+                fn(issue);
+            })
+        };
+        Publisher.prototype.createEvent = function(name){
+            this.events[name] = [];
+        };
+        var ng = new Publisher('National Geographic');
+        ng.createEvent('magazine');
+
+//        ng= {
+//            name:'Namtional Geographic',
+//            events:{
+//                'magazine':[]
+//            }
+//        }
+//        amy={
+//            name:'Amy Liu'
+//        }
+
+
+
+        function  Subcriber(name){
+            this.name = name;
+        }
+        Subcriber.prototype.subscribe = function(publisher,event,eventHandler){
+            publisher.events[event].push(eventHandler.bind(this));
+        };
+        var amy = new Subcriber('Amy Liu');
+        amy.subscribe(ng,'magazine',function(issue){
+            console.log(issue.date + ' ' + issue.title);
+        });
+
+
+        ng.publish('magazine',{date:'27th Feb 2016',title:'Life in space'})
+    </script>
+</body>
+</html>

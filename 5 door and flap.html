@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Door</title>
+    <style>
+        body,html{
+            height: 100%;
+        }
+        body{
+            display: flex;
+            align-items: center;
+            perspective: 800px;
+        }
+        .door{
+            margin: auto;
+            height: 300px;
+            width: 155px;
+            background-color: green;
+            padding: 15px 10px 0 10px;
+            transform-origin: 100% 0;
+            transition: transform 500ms ease;
+            transform-style: preserve-3d;
+        }
+        .flap{
+            height: 130px;
+            background-color: red;
+            margin: auto;
+            transform-origin: 50% 0%;
+            transition: transform 500ms ease;
+        }
+        .door:hover{
+            transform: rotateY(45deg);
+        }
+        .flap:hover{
+            transform: rotateX(45deg);
+        }
+    </style>
+</head>
+<body>
+    <div class="door">
+        <div class="flap"></div>
+    </div>
+</body>
+</html>
